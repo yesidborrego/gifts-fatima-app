@@ -1,0 +1,88 @@
+:root {
+  --main-navbar-bg-color: #f6a6c1;
+  --main-text-color: #502a20;
+  --secondary-text-color: #74381a;
+  --main-bg-color: #fef7ed;
+  --main-bg-card-color: #fae88c;
+  --secondary-bg-color: #d4eeef;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-bg-color);
+  font-size: 16px;
+}
+
+.navbar-bgcolor {
+  background-color: var(--main-navbar-bg-color);
+}
+
+.font-10 {
+  font-size: 10px;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.text-admin {
+  color: var(--main-text-color)
+}
+
+.text-info-select {
+  color: #532d1f;
+}
+
+.container {
+  max-width: 700px;
+}
+
+.card {
+  background-color: var(--main-bg-card-color);
+}
+
+.card-secondary {
+  background-color: var(--secondary-bg-color);
+}
+
+.font-primary-text {
+  color: var(--main-text-color);
+}
+
+.font-secondary-text {
+  color: var(--secondary-text-color);
+}
+
+.container-admin {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-main {
+  margin: auto;
+  max-width: 800px;
+}
+
+.form-side {
+  border-right: 1px solid #dee2e6;
+  padding: 8px;
+  width: 40%;
+}
+
+.list-gifts-side {
+  margin-left: 4px;
+  padding: 8px;
+  width: 60%;
+}
+
+.list-gifts-side-body {
+  margin-top: 16px;
+  max-height: 550px;
+  overflow-y: auto;
+}
