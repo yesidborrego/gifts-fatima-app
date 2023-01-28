@@ -11,6 +11,6 @@ export const PrivateRoutes = ({ children }: IRoutesProps) => {
     : (
       loadingLogin
       ? <Loading />
-      : <Navigate to={"/login"} />
+      : <Navigate to={"/login-guest"} />
     )
 }
