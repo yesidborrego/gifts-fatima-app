@@ -1,37 +1,17 @@
-import { useReducer } from 'react'
-import { GiftContext, giftReducer, IGiftState } from '../'
-import gifsList from '../../data';
-import { IRoutesProps } from '../interfaces/IRoutesProps';
-
-const INITIAL_STATE:IGiftState = {
-  todoCount: 2,
-  todoCompleted: 1,
-  todoPending: 1,
-  todos: gifsList,
-}
+import { useState } from "react";
+import { GiftContext, IGift } from "../"
+import { IRoutesProps } from "../interfaces/IRoutesProps";
 
 export const GiftProvider = ({ children }: IRoutesProps) => {
-  const [ giftState , dispatch] = useReducer(giftReducer, INITIAL_STATE);
+  const [giftState, setGifts] = useState<IGift[]>([])
 
-  const onAddGift = () => {
-    console.log("onAddGift");
+  const onGetAllGifts = (gifts: IGift[]) => {
+    setGifts(gifts);
   }
-
-  const onDeleteGift = () => {
-    console.log("onDeleteGift");
-  }
-
-  const onToggleDoneGift = () => {
-    console.log("onToggleGift");
-  }
-
-
   return (
     <GiftContext.Provider value={{
       giftState,
-      onAddGift,
-      onDeleteGift,
-      onToggleDoneGift,
+      onGetAllGifts,
     }}>
       { children }
     </GiftContext.Provider>

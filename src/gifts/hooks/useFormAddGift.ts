@@ -11,9 +11,14 @@ export const useFormAddGift = <T extends object>(initState: T) => {
     })
   }
 
+  const onResetInputs = () => {
+    setFormUser(initState);
+  }
+
   return {
     ...formState,
     formState,
     onChangeformState,
+    onResetInputs,
   }
 }

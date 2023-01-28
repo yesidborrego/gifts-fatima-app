@@ -1,14 +1,7 @@
-export interface IGifts {
+export interface IGift {
   id: string,
   description: string,
   done: boolean,
-}
-
-export interface IGiftState {
-  todoCompleted: number,
-  todoCount: number,
-  todoPending: number,
-  todos: IGifts[],
 }
 
 export interface IAuthForm {
