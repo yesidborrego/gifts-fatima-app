@@ -1,4 +1,4 @@
-import { IGift, useGifts } from "../";
+import Swal from "sweetalert2";
 import {
   addDoc,
   collection,
@@ -14,6 +14,8 @@ import {
 } from "firebase/firestore";
 import { useContext } from "react";
 import { LoginContext } from "../../auth";
+import { IGift, useGifts } from "../";
+
 const db = getFirestore();
 
 export const useFireStore = () => {
@@ -45,7 +47,14 @@ export const useFireStore = () => {
       createdAt: serverTimestamp(),
     }
     await addDoc(colRef, newGift);
-    toastr.success("Se ha agregado el regalo a la lista");
+    Swal.fire({
+      icon: 'success',
+      title: 'El regalo se ha agregado a la lista',
+      showConfirmButton: false,
+      timer: 2000,
+      toast: true,
+      position: 'top-right',
+    })
   };
 
   const deleteGift = async (id: string) => {
@@ -60,10 +69,37 @@ export const useFireStore = () => {
     })
     if(userData.admin) {
       doneValue
-      ? toastr.success("Se ha habilitado el regalo")
-      : toastr.warning("Se ha inhabilitado el regalo");
+      ? (
+          Swal.fire({
+            icon: 'success',
+            title: 'El regalo se ha habilitado',
+            showConfirmButton: false,
+            timer: 2000,
+            toast: true,
+            position: 'top-right',
+          })
+        )
+      : (
+        (
+          Swal.fire({
+            icon: 'warning',
+            title: 'El regalo se ha inhabilitado',
+            showConfirmButton: false,
+            timer: 2000,
+            toast: true,
+            position: 'top-right',
+          })
+        )
+      )
     } else {
-      toastr.success("Haz escogido un regalo, Gracias!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Haz escogido un regalo, Fatima te lo agradece!',
+        showConfirmButton: false,
+        timer: 3000,
+        toast: true,
+        position: 'top-right',
+      })
     }
   }
 

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { useFireStore } from '..';
 
 
@@ -21,11 +22,14 @@ export const useActionsGifts = () => {
     }).then((result: any) => {
       if (result.isConfirmed) {
         deleteGift(id);
-        Swal.fire(
-          'Eliminado!',
-          'El regalo ha sido eliminado.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'Eliminado!',
+          text: 'El regalo ha sido eliminado.',
+          showConfirmButton: false,
+          timer: 2000,
+          toast: true,
+        })
       }
     })
   };
