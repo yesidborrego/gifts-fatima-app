@@ -1,4 +1,4 @@
-import { IGifts } from '../gifts/interfaces/IGifts';
+import { IGifts } from '../gifts/interfaces/Gifts';
 
 const gifsList:IGifts[]  = [
   {

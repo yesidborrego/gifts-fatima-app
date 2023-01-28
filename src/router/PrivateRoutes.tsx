@@ -1,13 +1,16 @@
-// import { useContext } from "react"
+import { useContext } from "react"
 import { Navigate } from "react-router-dom";
-// import { AuthContext } from "../auth";
+import { Loading, LoginContext } from "../auth";
 import { IRoutesProps } from '../gifts/interfaces/IRoutesProps';
 
 export const PrivateRoutes = ({ children }: IRoutesProps) => {
-  // const { authState: { logged } } = useContext(AuthContext);
-  const logged = true;
+  const { logged, loadingLogin } = useContext(LoginContext);
 
   return (logged)
-    ? children
-    : <Navigate to={"/login"} />
+    ? <>{ children }</>
+    : (
+      loadingLogin
+      ? <Loading />
+      : <Navigate to={"/login"} />
+    )
 }

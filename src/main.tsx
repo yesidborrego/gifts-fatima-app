@@ -4,11 +4,14 @@ import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './router/AppRoutes'
 
 import './styles.css'
+import { LoginProvider } from './auth';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AppRoutes />
+      <LoginProvider>
+        <AppRoutes />
+      </LoginProvider>
     </BrowserRouter>
   </React.StrictMode>,
 )

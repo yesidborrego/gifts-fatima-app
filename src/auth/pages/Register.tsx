@@ -3,20 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IAuthForm, useFormAddGift } from '../../gifts';
 import { LoginContext, firebaseErrors } from '../';
 
-export const Login = () => {
+export const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { email, password, onChangeformState } = useFormAddGift<IAuthForm>({
+  const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
+  const { email, password, repeatPassword, onChangeformState } = useFormAddGift<IAuthForm>({
     email: "",
     password: "",
+    repeatPassword: "",
   });
 
-  const { login } = useContext(LoginContext);
+  const { signup } = useContext(LoginContext);
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      await login({email, password});
+      await signup({email, password});
         navigate("/", {
           replace: true,
         });
@@ -33,9 +35,9 @@ export const Login = () => {
   return (
     <div className="container-login">
       <div className="form-login">
-        <h1>Iniciar sesión</h1>
+        <h1>Registrar usuario</h1>
         <form className="m-3" onSubmit={(event) => onSubmit(event)}>
-          <div className="mb-2">
+          <div>
             <input
               className="form-control"
               name="email"
@@ -46,7 +48,7 @@ export const Login = () => {
             />
           </div>
 
-          <div className="input-group input-group-sm mb-4">
+          <div className="input-group input-group-sm my-2">
             <input
               className="form-control"
               maxLength={12}
@@ -69,10 +71,42 @@ export const Login = () => {
             </button>
           </div>
 
+          <div className="input-group input-group-sm mb-4">
+            <input
+              className="form-control"
+              maxLength={12}
+              name="repeatPassword"
+              onChange={onChangeformState}
+              placeholder="Repite la contraseña"
+              type={ showRepeatPassword ? "text" : "password"}
+              value={ repeatPassword }
+            />
+            <button
+              className="btn btn-secondary btn-eyes"
+              type="button"
+              onClick={ () => setShowRepeatPassword(!showRepeatPassword) }
+            >
+              {
+                showRepeatPassword
+                ? ( <i className="fa-solid fa-eye"></i> )
+                : ( <i className="fa-solid fa-eye-slash"></i> )
+              }
+            </button>
+          </div>
+
           <button className="btn-login" type="submit">
-            Ingresar
+            Registrarse
           </button>
         </form>
+
+        <div className="redirect-login-signup">
+          <span className="font-12">
+            Si ya estás registrado {" "}
+            <Link to={"/login"}>
+              inicia sesíon
+            </Link>
+          </span>
+        </div>
       </div>
     </div>
   );

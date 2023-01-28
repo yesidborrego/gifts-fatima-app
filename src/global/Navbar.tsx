@@ -1,16 +1,25 @@
+import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom"
-import { Dashboard } from '../gifts/pages/Dashboard';
+import { firebaseErrors, LoginContext } from "../auth";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const { logout, userData } = useContext(LoginContext);
 
-  const onLogout = () => {
-    // const lastPath = `${pathname}${search}`;
-    // localStorage.setItem("lastpath", lastPath);
-    // actionLogout();
-    navigate("/login", {
-      replace: true
-    });
+  const onLogout = async () => {
+    try {
+      await logout();
+      navigate("/login", {
+        replace: true,
+      });
+    } catch (error: any) {
+      const [ err ] = firebaseErrors.filter(er => er.code === error.code);
+      if(err) {
+        console.error(err.value);
+      } else {
+        console.error(error.code)
+      }
+    }
   }
 
   return (
@@ -33,33 +42,39 @@ export const Navbar = () => {
             >
               Lista de regalos
             </NavLink>
-            <NavLink
-              className={({ isActive }) => `nav-item nav-link ${isActive ? "active" : ""}`}
-              to={"/dashboard"}
-            >
-              Dashboard
-            </NavLink>
+            {
+              userData && userData.admin
+              ? (
+                <NavLink
+                  className={({ isActive }) => `nav-item nav-link ${isActive ? "active" : ""}`}
+                  to={"/dashboard"}
+                >
+                  Dashboard
+                </NavLink>
+              )
+              : null
+            }
           </div>
 
           <hr className='border border-white border-1' />
-
-          <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-sm-end align-items-center">
-            <ul className="navbar-nav ml-auto d-flex align-items-center">
-              <li>
-                <span className='nav-link text-admin fw-bold'>
-                  Sirli
-                </span>
-              </li>
-              <li>
-                <button
-                  className="nav-item nav-link btn"
-                  onClick={ onLogout }
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
-          </div>
+          {
+              userData && userData.admin
+              ? (
+                <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-sm-end align-items-center">
+                  <ul className="navbar-nav ml-auto d-flex align-items-center">
+                    <li>
+                      <button
+                        className="nav-item nav-link btn"
+                        onClick={ onLogout }
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )
+              : null
+            }
         </div>
       </div>
     </nav>

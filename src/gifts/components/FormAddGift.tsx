@@ -1,11 +1,12 @@
 import { useFormAddGift, IGifts } from '../';
 
 export const FormAddGift = () => {
-  const { id, description, done,formState, onChangeformState } = useFormAddGift<IGifts>({
-    id: "",
-    description: "",
-    done: false
-  });
+  const { id, description, done, formState, onChangeformState } =
+    useFormAddGift<IGifts>({
+      id: "",
+      description: "",
+      done: false,
+    });
 
   return (
     <>

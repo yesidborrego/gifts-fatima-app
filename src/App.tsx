@@ -1,23 +1,29 @@
+import { useContext } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
-import { Dashboard, GiftPage, Navbar } from "./gifts"
+import { LoginContext } from "./auth"
+import { Dashboard, GiftPage, GiftProvider, Navbar } from "./gifts"
 
 function App() {
 
+  const { userData: { admin } } = useContext(LoginContext);
+
   return (
-    <>
-      <header>
-        <Navbar />
-      </header>
+    <GiftProvider>
+      <>
+        <header>
+          <Navbar />
+        </header>
 
-      <main className="container my-3">
-        <Routes>
-          <Route path="list" element={ <GiftPage /> } />
-          <Route path="dashboard" element={ <Dashboard /> } />
-          <Route path="/" element={ <Navigate to={"/list"}/> } />
-        </Routes>
+        <main className="container my-3">
+          <Routes>
+            <Route path="list" element={ <GiftPage /> } />
+            <Route path="dashboard" element={ admin ? <Dashboard /> : <Navigate to={"/list"}/>  } />
+            <Route path="/" element={ <Navigate to={"/list"}/> } />
+          </Routes>
 
-      </main>
-    </>
+        </main>
+      </>
+    </GiftProvider>
   )
 }
 

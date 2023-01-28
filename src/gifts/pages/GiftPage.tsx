@@ -1,6 +1,6 @@
 import gifsList from "../../data";
 import { GiftsList } from '../';
-import { IGifts } from "../interfaces/IGifts";
+import { IGifts } from "../interfaces/Gifts";
 
 export const GiftPage = () => {
   const gifs:IGifts[] = gifsList;

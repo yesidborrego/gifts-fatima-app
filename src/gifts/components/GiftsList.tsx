@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { IGifts } from "../interfaces/IGifts";
+import { IGifts } from "../interfaces/Gifts";
 
 interface IProps {
   gifts: IGifts,
