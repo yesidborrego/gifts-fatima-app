@@ -57,24 +57,18 @@ export const Navbar = () => {
           </div>
 
           <hr className='border border-white border-1' />
-          {
-              userData && userData.admin
-              ? (
-                <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-sm-end align-items-center">
-                  <ul className="navbar-nav ml-auto d-flex align-items-center">
-                    <li>
-                      <button
-                        className="nav-item nav-link btn"
-                        onClick={ onLogout }
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )
-              : null
-            }
+          <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-sm-end align-items-center">
+            <ul className="navbar-nav ml-auto ul-navbar-logout">
+              <li>
+                <button
+                  className="nav-item nav-link btn"
+                  onClick={ onLogout }
+                >
+                  Salir
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

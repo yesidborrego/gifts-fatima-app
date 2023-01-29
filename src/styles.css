@@ -225,6 +225,13 @@ body {
   width: 100%;
 }
 
+.ul-navbar-logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 @media screen and (min-width: 576px) {
   .container-admin {
     flex-direction: row;
@@ -238,5 +245,9 @@ body {
 
   .list-gifts-side {
     width: 60%;
+  }
+
+  .ul-navbar-logout {
+    justify-content: flex-end;
   }
 }
